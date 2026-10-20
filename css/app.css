@@ -677,3 +677,47 @@ select option, select optgroup { background: var(--surface); color: var(--text);
 .badge.rank.r3 { color: #fff; }
 .first  .podium-step { color: #2b1700; text-shadow: none; }
 .second .podium-step { color: #0f172a; text-shadow: none; }
+
+/* Flexible forms and complete text on narrow screens. */
+.main, .main > div, .card, .auth-panel, .auth-form-card, .hero-content,
+.brand-titles, .header-actions, .feature-item > div, label, fieldset { min-width: 0; }
+h1, h2, h3, p, .brand-text, .brand-sub, .day-item, .hint, .callout { overflow-wrap: anywhere; }
+input, select, textarea { min-width: 0; max-width: 100%; }
+button, .btn { white-space: normal; overflow-wrap: anywhere; }
+.header-top, .header-actions { flex-wrap: wrap; }
+.seal-frame, .seal, .hero-seal-container { flex-shrink: 0; }
+.seal-frame img, .seal, .hero-logo, .foot-seal { object-fit: contain; background: #fff; }
+.seal-frame img { border-radius: 50%; }
+.user-text-name { white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; }
+.student-fields, .filter-fields { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,190px),1fr)); gap: .8rem; }
+.filter-fields { margin: 1rem 0; }
+.student-list, .catalog-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,290px),1fr)); gap: 1rem; margin: 1rem 0; }
+.student-card { min-width: 0; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-sunken); align-content: start; }
+.student-card fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: .8rem; }
+.student-card textarea { min-height: 0; }
+.student-email { overflow-wrap: anywhere; }
+.catalog-manager { margin-top: 1rem; }
+.catalog-manager summary { cursor: pointer; font-size: 1.1rem; font-weight: 750; padding: .3rem 0; }
+.catalog-manager[open] summary { margin-bottom: 1rem; }
+.catalog-grid > form { padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); align-content: start; }
+.home-links { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,200px),1fr)); gap: 1rem; margin: 1rem 0; }
+@media (max-width: 860px) {
+  .auth-layout { grid-template-columns: minmax(0,1fr); }
+  .auth-hero { padding: 2rem 1.25rem; }
+  .auth-panel { padding: 1.5rem 1rem; }
+  .hero-features { display: grid; gap: .6rem; }
+  .hero-seal-container { width: 72px; height: 72px; }
+  .hero-subtitle { margin-bottom: 1rem; }
+}
+@media (max-width: 560px) {
+  .header-top { gap: .7rem; }
+  .header-actions { width: 100%; justify-content: flex-end; }
+  .user-profile-badge { min-width: 0; flex: 1 1 100%; padding: .35rem .6rem; }
+  .user-text-name, .btn-logout-modern span { display: inline; }
+  .user-text-name { max-width: none; font-size: .8rem; }
+  .auth-form-card { padding: 1.5rem 1rem; }
+  input, select, textarea { font-size: 16px; }
+  .btn, .btn-logout-modern { min-height: 44px; }
+  .student-fields, .filter-fields { grid-template-columns: minmax(0,1fr); }
+  .links { gap: .75rem; }
+}

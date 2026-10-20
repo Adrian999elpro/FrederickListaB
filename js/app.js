@@ -2,6 +2,7 @@
 import { CONFIG, requireAccess, can, logout, $, esc, showError } from "./core.js";
 
 const VIEWS = [
+  { id: "home",        title: "🏠 Inicio",                 load: () => import("./views/home.js") },
   { id: "calendar",    title: "📅 Calendario",             load: () => import("./views/calendar.js") },
   { id: "suggestions", title: "💡 Sugerencias",            load: () => import("./views/suggestions.js") },
   { id: "chat",        title: "💬 Chat global",            load: () => import("./views/chat.js") },

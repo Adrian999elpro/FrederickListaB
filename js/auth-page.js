@@ -1,5 +1,6 @@
 // Pantalla pública: inicio de sesión, registro, recuperación y restablecimiento de contraseña.
 import { sb, CONFIG, $, $$, getAccess, login, withBusy } from "./core.js";
+import { loadStudentOptions, studentFields, bindStudentFields } from "./student-options.js";
 
 const VIEWS = ["login", "register", "forgot", "reset"];
 const MSG = {
@@ -9,6 +10,17 @@ const MSG = {
 };
 const params = new URLSearchParams(location.search);
 const recovering = params.get("view") === "reset" || location.hash.includes("type=recovery");
+const registerForm = $("#f-register");
+let studentOptionsReady = false;
+try {
+  const catalog = await loadStudentOptions();
+  $("#registration-course").innerHTML = studentFields(catalog);
+  bindStudentFields(registerForm, catalog);
+  studentOptionsReady = true;
+} catch {
+  $("#registration-course").textContent = "No se pudieron cargar los cursos. Recarga la página para intentarlo otra vez.";
+  registerForm.querySelector("[type=submit]").disabled = true;
+}
 
 // Identidad desde la configuración
 $$("[data-logo]").forEach((i) => { i.src = CONFIG.LOGO_URL; });
@@ -70,22 +82,32 @@ $("#f-login").addEventListener("submit", async (e) => {
 
 $("#f-register").addEventListener("submit", async (e) => {
   e.preventDefault(); const f = e.currentTarget;
+  if (!studentOptionsReady) return;
   if (!same(f)) return note("Las contraseñas no coinciden.", "err");
   await withBusy(f.querySelector("[type=submit]"), async () => {
-    const { error } = await sb.auth.signUp({
+    const course = f.course_id.selectedOptions[0].textContent;
+    const { data, error } = await sb.auth.signUp({
       email: f.email.value.trim(), password: f.password.value,
-      options: { data: { full_name: f.full_name.value.trim(), course: f.course.value.trim() }, emailRedirectTo: new URL("login.html", location.href).href },
+      options: { data: {
+        full_name: f.full_name.value.trim(), course: `${course} "${f.parallel.value}"`,
+        course_id: f.course_id.value, parallel: f.parallel.value,
+        specialty_id: f.specialty_id.disabled ? null : (f.specialty_id.value || null),
+      }, emailRedirectTo: new URL("login.html", location.href).href },
     });
     // Mensaje único: no se revela si el correo ya existe ni por qué se rechazó.
     if (error) note("No pudimos completar el registro. Revisa los datos o consulta con el administrador.", "err");
-    else { f.reset(); note("Revisa tu correo para confirmar la cuenta."); }
+    else if (data.session) {
+      sessionStorage.removeItem("cs_access");
+      if (await getAccess(true)) location.replace("app.html");
+      else note("La cuenta se creó, pero no se pudo abrir el inicio. Intenta iniciar sesión.", "warn");
+    } else note("No se pudo iniciar la sesión automáticamente. Intenta iniciar sesión o consulta con el administrador.", "warn");
   });
 });
 
 $("#f-forgot").addEventListener("submit", async (e) => {
   e.preventDefault(); const f = e.currentTarget;
   await withBusy(f.querySelector("[type=submit]"), async () => {
-    await sb.auth.resetPasswordForEmail(f.email.value.trim(), { redirectTo: new URL("index.html?view=reset", location.href).href });
+    await sb.auth.resetPasswordForEmail(f.email.value.trim(), { redirectTo: new URL("login.html?view=reset", location.href).href });
     note("Si el correo está registrado, recibirás un enlace para restablecer la contraseña."); // siempre igual
   });
 });
@@ -97,7 +119,8 @@ $("#f-reset").addEventListener("submit", async (e) => {
     const { error } = await sb.auth.updateUser({ password: f.password.value });
     if (error) return note("No se pudo guardar la contraseña. Pide un nuevo enlace e inténtalo otra vez.", "err");
     await sb.auth.signOut({ scope: "local" });
-    location.replace("index.html?msg=changed");
+    location.replace("login.html?msg=changed");
   });
 });
 if (location.hash === "#register") show("register");
+if (recovering) show("reset");

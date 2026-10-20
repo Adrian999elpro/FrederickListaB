@@ -106,3 +106,22 @@ html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 .menu-panel .nav-link { display: block; padding: .65rem .9rem; border-radius: var(--radius-sm); white-space: normal; text-align: left; }
 .menu-panel .nav-link:hover { background: var(--brand-soft); }
 .menu-panel .nav-link[aria-current] { background: var(--brand); color: var(--on-brand); }
+
+/* Let public content wrap without widening the phone viewport. */
+.pub-brand { min-width: 0; max-width: 100%; }
+.pub-brand .brand-text { min-width: 0; }
+.pub-header > .row { flex-wrap: wrap; }
+.hero-id > div { min-width: 0; max-width: 100%; }
+.hero-name { overflow-wrap: anywhere; }
+.team-grid { grid-template-columns: repeat(auto-fill,minmax(min(100%,210px),1fr)); }
+.cal-grid { grid-template-columns: repeat(7,minmax(0,1fr)); }
+.cal-day { min-width: 0; }
+.cal-chip { white-space: normal; overflow-wrap: anywhere; text-overflow: clip; }
+.menu-btn #menu-cur { white-space: normal; overflow: visible; text-overflow: clip; }
+@media (max-width: 640px) {
+  .pub-header { gap: .7rem; padding: .75rem 1rem; }
+  .pub-brand { flex: 1 1 100%; }
+  .pub-nav { display: flex; margin-left: 0; flex-wrap: wrap; }
+  .pub-header > .row { margin-left: auto; }
+  .cal-chip { padding: .1rem; font-size: .65rem; }
+}

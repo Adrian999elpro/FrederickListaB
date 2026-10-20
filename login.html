@@ -11,7 +11,7 @@
     });
   </script>
   <title>Acceso · Consejo Estudiantil</title>
-  <link rel="icon" type="image/png" href="img/sello.png'http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='48'%3E%F0%9F%97%B3%EF%B8%8F%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="img/sello.png">
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
@@ -22,30 +22,30 @@
   <aside class="auth-hero">
     <div class="hero-content">
       <div class="hero-seal-container">
-        <img class="hero-seal" data-logo src="img/sello.png'http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='48'%3E%F0%9F%97%B3%EF%B8%8F%3C/text%3E%3C/svg%3E" alt="Sello FWT" width="88" height="88">
+        <img class="hero-seal" data-logo src="img/sello.png" alt="Sello FWT" width="88" height="88">
       </div>
       <span class="hero-motto" data-tagline>#VotaConVoz</span>
-      <h1 class="hero-title">Consejo Estudiantil<br><span class="highlight" data-name>Tu voz cuenta</span></h1>
+      <h1 class="hero-title" data-name>Consejo Estudiantil</h1>
       <p class="hero-subtitle">
         Regístrate para chatear con la lista, enviar sugerencias y contarnos qué necesita el colegio.</p>
 
       <div class="hero-features">
         <div class="feature-item">
-          <div class="feature-icon">💳</div>
+          <div class="feature-icon" aria-hidden="true">💬</div>
           <div>
             <strong>Chat global</strong>
             <p>Conversa con los demás estudiantes y con la lista.</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">🎓</div>
+          <div class="feature-icon" aria-hidden="true">💡</div>
           <div>
             <strong>Sugerencias y necesidades</strong>
             <p>Cuéntanos qué necesita el colegio.</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">📊</div>
+          <div class="feature-icon" aria-hidden="true">📅</div>
           <div>
             <strong>Calendario de eventos</strong>
             <p>Entérate de todo lo que viene.</p>
@@ -91,9 +91,7 @@
           <label>Nombre Completo
             <input name="full_name" autocomplete="name" required maxlength="120" placeholder="Nombre y Apellido">
           </label>
-          <label>Curso
-            <input name="course" required maxlength="60" placeholder="Ej.: 2do Bachillerato A">
-          </label>
+          <div id="registration-course"><p class="hint">Cargando cursos…</p></div>
           <label>Correo Electrónico
             <input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="ejemplo@correo.com">
           </label>
@@ -103,7 +101,7 @@
           <label>Confirmar Contraseña
             <input name="again" type="password" autocomplete="new-password" required maxlength="128" placeholder="Repite la contraseña">
           </label>
-          <p class="hint">Mínimo 10 caracteres. Se enviará correo de confirmación.</p>
+          <p class="hint">Mínimo 10 caracteres. Al crear tu cuenta entrarás directamente al inicio.</p>
           <button class="btn primary" type="submit" style="width: 100%;">Registrar Cuenta</button>
         </form>
         <p class="links"><a href="#" data-go="login">← Volver a inicio de sesión</a></p>

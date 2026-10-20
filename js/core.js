@@ -40,6 +40,8 @@ export async function withBusy(btn, fn) {
 }
 
 const MESSAGES = {
+  invalid_student_course: "Revisa el nombre, el curso y el paralelo.",
+  specialty_only_bachillerato: "Las especialidades solo corresponden a bachillerato.",
   already_voted: "Ya registraste tu voto en esta votación.",
   election_not_open: "Esta votación no está abierta.",
   invalid_list: "La lista seleccionada no es válida.",
