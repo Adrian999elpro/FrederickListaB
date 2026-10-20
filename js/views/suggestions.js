@@ -1,5 +1,5 @@
-import { sb, can, esc, fmtDate, toast, showError, withBusy, $ } from "../core.js";
-import { loadStudentOptions, filterFields, readFilters } from "../student-options.js";
+import { sb, can, esc, fmtDate, toast, showError, withBusy, $ } from "../core.js?v=20261020c";
+import { loadStudentOptions, filterFields, readFilters } from "../student-options.js?v=20261020c";
 export async function render(root, access) {
   const all = can(access, "suggestions.read"), catalog = await loadStudentOptions();
   root.innerHTML = `<div class="card"><h2>💡 Sugerencias y necesidades</h2><p class="muted">Cuéntanos una idea o qué necesita el colegio. Tu nombre y curso se envían con el mensaje.</p>

@@ -1,5 +1,5 @@
-import { sb, esc, toast, showError, withBusy } from "../core.js";
-import { loadStudentOptions, studentFields, bindStudentFields } from "../student-options.js";
+import { sb, esc, toast, showError, withBusy } from "../core.js?v=20261020c";
+import { loadStudentOptions, studentFields, bindStudentFields } from "../student-options.js?v=20261020c";
 export async function render(root, access) {
   const [catalog, result] = await Promise.all([loadStudentOptions(), sb.from("profiles").select("full_name,course,course_id,parallel,specialty_id,role_id").eq("id", access.id).single()]);
   if (result.error) throw result.error;

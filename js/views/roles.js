@@ -1,4 +1,4 @@
-import { sb, esc, toast, showError, confirmBox, invalidate, $, $$ } from "../core.js";
+import { sb, esc, toast, showError, confirmBox, invalidate, $, $$ } from "../core.js?v=20261020c";
 
 export async function render(root) {
   const [r, p, rp] = await Promise.all([

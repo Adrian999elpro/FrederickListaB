@@ -1,5 +1,5 @@
-import { sb, esc, toast, showError, confirmBox, withBusy, $ } from "../core.js";
-import { mountCalendar } from "../calendar.js";
+import { sb, esc, toast, showError, confirmBox, withBusy, $ } from "../core.js?v=20261020c";
+import { mountCalendar } from "../calendar.js?v=20261020c";
 export async function render(root) {
   root.innerHTML = `<div class="card"><h2>🗓️ Gestionar eventos</h2>
     <form id="f" class="form"><input type="hidden" name="id">

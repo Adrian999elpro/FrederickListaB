@@ -1,5 +1,5 @@
-import { sb, can, esc, toast, showError, withBusy, $ } from "../core.js";
-import { loadStudentOptions, studentFields, bindStudentFields, filterFields, readFilters } from "../student-options.js";
+import { sb, can, esc, toast, showError, withBusy, $ } from "../core.js?v=20261020c";
+import { loadStudentOptions, studentFields, bindStudentFields, filterFields, readFilters } from "../student-options.js?v=20261020c";
 export async function render(root, access) {
   const manage = can(access, "users.manage");
   const [roles, catalog] = await Promise.all([sb.from("roles").select("id,name").order("name"), loadStudentOptions()]);

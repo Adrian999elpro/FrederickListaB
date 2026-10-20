@@ -1,4 +1,4 @@
-import { sb, esc } from "./core.js";
+import { sb, esc } from "./core.js?v=20261020c";
 export async function loadStudentOptions() {
   const results = await Promise.all([
     sb.from("school_courses").select("id,name,level,position").order("position").order("name"),

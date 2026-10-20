@@ -1,5 +1,5 @@
-import { sb, showError } from "../core.js";
-import { mountCalendar } from "../calendar.js";
+import { sb, showError } from "../core.js?v=20261020c";
+import { mountCalendar } from "../calendar.js?v=20261020c";
 export async function render(root) {
   const { data, error } = await sb.from("events").select("id,title,event_date,details").order("event_date");
   if (error) return showError(error);

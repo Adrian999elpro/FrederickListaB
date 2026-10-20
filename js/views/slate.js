@@ -1,5 +1,5 @@
 // Editor de la lista pública: datos y logo, rangos (con orden) e integrantes (con foto y orden).
-import { sb, esc, toast, showError, confirmBox, withBusy, mediaUrl, uploadMedia, $ } from "../core.js";
+import { sb, esc, toast, showError, confirmBox, withBusy, mediaUrl, uploadMedia, $ } from "../core.js?v=20261020c";
 let cur = null, ctx = {};
 const drop = (p) => p && sb.storage.from("council-media").remove([p]).catch(() => {});
 

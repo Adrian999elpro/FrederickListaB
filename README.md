@@ -20,12 +20,15 @@ El proyecto Supabase `Frederickconsejo` usa correo y contraseña, con **Authenti
 
 El enlace de recuperación debe permitir `login.html?view=reset` dentro de las URL de redirección de Supabase.
 
+La sesión se conserva en el navegador entre visitas y se renueva automáticamente. No hay cierre por inactividad. Se migra la sesión anterior de la pestaña al almacenamiento persistente, y **Salir** la elimina. Un error temporal al consultar permisos no elimina la sesión; una cuenta desactivada sigue sin poder acceder.
+
 ## Desarrollo y verificación
 
 El sitio es estático. Servir la carpeta con cualquier servidor HTTP local (por ejemplo, `python -m http.server 8766`).
 
 - `tests/courses.integration.sql`: verifica catálogos, metadatos de registro, permisos, edición, especialidades solo en bachillerato y privacidad de sugerencias. Usa una transacción y revierte los datos de prueba.
 - `node tests/ui-fixture.mjs`: genera `.preview/` con datos ficticios y sin escrituras a Supabase. Abrir `/.preview/app.html#users` para comprobar edición, filtros, catálogos y diseño móvil.
+- `node tests/session.test.mjs`: verifica conservación y migración de sesión, renovación habilitada, errores temporales, cuentas desactivadas y salida voluntaria, sin credenciales reales.
 - Las migraciones de `supabase/migrations` corresponden a la actualización del proyecto existente; no son un instalador del esquema original.
 
 Validado el 20 de octubre de 2026: registro real con sesión inmediata (cuenta temporal eliminada), pruebas de permisos y campos, filtros de interfaz, logo, recuperación y pantallas de 320 y 360 píxeles.

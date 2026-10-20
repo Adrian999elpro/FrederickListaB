@@ -1,22 +1,29 @@
 // Shell del panel del consejo: Navegación por permisos y carga diferida de cada sección.
-import { CONFIG, requireAccess, can, logout, $, esc, showError } from "./core.js";
+import { CONFIG, requireAccess, can, logout, $, esc, showError } from "./core.js?v=20261020c";
 
 const VIEWS = [
-  { id: "calendar",    title: "📅 Calendario",             load: () => import("./views/calendar.js") },
-  { id: "suggestions", title: "💡 Sugerencias",            load: () => import("./views/suggestions.js") },
-  { id: "chat",        title: "💬 Chat global",            load: () => import("./views/chat.js") },
-  { id: "profile",     title: "👤 Mi perfil",              load: () => import("./views/profile.js") },
-  { id: "site",       title: "🎨 Diseño y contenido",    permission: "site.manage",      load: () => import("./views/site.js") },
-  { id: "slate",       title: "🗳️ Lista e integrantes",   permission: "list.manage",     load: () => import("./views/slate.js") },
-  { id: "events",      title: "🗓️ Gestionar eventos",     permission: "events.manage",   load: () => import("./views/events.js") },
-  { id: "users",       title: "👥 Usuarios",               permission: "users.read",      load: () => import("./views/users.js") },
-  { id: "roles",       title: "🛡️ Roles y permisos",      permission: "roles.manage",    load: () => import("./views/roles.js") },
-  { id: "settings",    title: "⚙️ Registro",              permission: "settings.manage", load: () => import("./views/settings.js") },
-  { id: "audit",       title: "📜 Auditoría",              permission: "audit.read",      load: () => import("./views/audit.js") },
+  { id: "calendar",    title: "📅 Calendario",             load: () => import("./views/calendar.js?v=20261020c") },
+  { id: "suggestions", title: "💡 Sugerencias",            load: () => import("./views/suggestions.js?v=20261020c") },
+  { id: "chat",        title: "💬 Chat global",            load: () => import("./views/chat.js?v=20261020c") },
+  { id: "profile",     title: "👤 Mi perfil",              load: () => import("./views/profile.js?v=20261020c") },
+  { id: "site",       title: "🎨 Diseño y contenido",    permission: "site.manage",      load: () => import("./views/site.js?v=20261020c") },
+  { id: "slate",       title: "🗳️ Lista e integrantes",   permission: "list.manage",     load: () => import("./views/slate.js?v=20261020c") },
+  { id: "events",      title: "🗓️ Gestionar eventos",     permission: "events.manage",   load: () => import("./views/events.js?v=20261020c") },
+  { id: "users",       title: "👥 Usuarios",               permission: "users.read",      load: () => import("./views/users.js?v=20261020c") },
+  { id: "roles",       title: "🛡️ Roles y permisos",      permission: "roles.manage",    load: () => import("./views/roles.js?v=20261020c") },
+  { id: "settings",    title: "⚙️ Registro",              permission: "settings.manage", load: () => import("./views/settings.js?v=20261020c") },
+  { id: "audit",       title: "📜 Auditoría",              permission: "audit.read",      load: () => import("./views/audit.js?v=20261020c") },
 ];
 
-const access = await requireAccess();
-if (access) boot(access);
+try {
+  const access = await requireAccess();
+  if (access) boot(access);
+} catch {
+  $("#main").innerHTML = `<section class="card"><h2>No pudimos comprobar tu conexión</h2>
+    <p>Tu sesión sigue guardada. Revisa tu conexión e inténtalo de nuevo.</p>
+    <button class="btn primary" id="retry-access">Reintentar</button></section>`;
+  $("#retry-access").addEventListener("click", () => location.reload());
+}
 
 function boot(access) {
   const logoEl = document.querySelector("[data-logo]");
@@ -38,7 +45,7 @@ function boot(access) {
   menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
   document.addEventListener("click", (e) => { if (!e.target.closest(".menu")) setMenu(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) { setMenu(false); mbtn.focus(); } });
-  import("./site.js").then((m) => m.loadSite().then(m.applyTheme)).catch(() => {});   // colores y estilo personalizados
+  import("./site.js?v=20261020c").then((m) => m.loadSite().then(m.applyTheme)).catch(() => {});   // colores y estilo personalizados
 
   let token = 0;
   async function route() {

@@ -1,12 +1,13 @@
 // Núcleo del frontend: cliente Supabase, sesión, acceso, caché y utilidades de interfaz.
 // Aquí NO se decide ninguna autorización: lo que se oculta en pantalla lo vuelve a exigir el servidor (RLS/RPC).
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm";
-import { CONFIG } from "./config.js";
+import { CONFIG } from "./config.js?v=20261020c";
+import { persistentSessionStorage } from "./session-storage.js?v=20261020c";
 
 export { CONFIG };
 export const sb = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, {
   auth: {
-    storage: CONFIG.PERSIST_SESSION ? window.localStorage : window.sessionStorage,
+    storage: persistentSessionStorage(window.localStorage, window.sessionStorage),
     persistSession: true, autoRefreshToken: true, detectSessionInUrl: true,
   },
 });
@@ -84,7 +85,7 @@ export async function login(email, password) {
 
   const access = await getAccess(true);
   if (!access) {
-    await sb.auth.signOut();
+    await sb.auth.signOut({ scope: "local" });
     throw new Error("Tu cuenta no tiene acceso activo.");
   }
 
@@ -106,28 +107,20 @@ export async function getAccess(force = false) {
     } catch { /* sin caché */ }
   }
   const { data, error } = await sb.rpc("get_my_access");
-  if (error || !data) return null;
+  if (error) throw new Error("No pudimos comprobar tu acceso. Revisa la conexión e inténtalo de nuevo.");
+  if (!data) return null;
   sessionStorage.setItem("cs_access", JSON.stringify({ t: Date.now(), a: data }));
   return data;
 }
 export const can = (access, code) => !!access?.permissions?.includes(code);
 
-function startIdleTimer() {
-  let last = Date.now();
-  const bump = () => { last = Date.now(); };
-  ["pointerdown", "keydown", "touchstart", "scroll"].forEach((e) => addEventListener(e, bump, { passive: true }));
-  const check = () => { if (Date.now() - last > CONFIG.IDLE_MINUTES * 60_000) logout("idle"); };
-  setInterval(check, 15_000);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) check(); });
-}
-
 // Guardia de página: exige sesión válida y cuenta activa verificadas por el servidor.
 export async function requireAccess() {
-  const { data } = await sb.auth.getSession();
+  const { data, error } = await sb.auth.getSession();
+  if (error) throw new Error("No pudimos recuperar tu sesión. Revisa la conexión e inténtalo de nuevo.");
   if (!data.session) { location.replace("login.html"); return null; }
   const access = await getAccess(true);
   if (!access) { await logout("disabled"); return null; }
-  startIdleTimer();
   sb.auth.onAuthStateChange((ev) => { if (ev === "SIGNED_OUT") location.replace("login.html"); });
   return access;
 }

@@ -4,5 +4,5 @@ export const CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_uTE7T27KhdTOTkASksIW_A_yCkdp58c",             // ← Settings → API → publishable/anon key
   APP_NAME: "Consejo Estudiantil", APP_SHORT: "CONSEJO", TAGLINE: "Tu voz cuenta",
   LOGO_URL: "img/sello.png",
-  IDLE_MINUTES: 30, PERSIST_SESSION: false, ACCESS_TTL_MS: 5 * 60_000, MIN_PASSWORD: 10,
+  ACCESS_TTL_MS: 5 * 60_000, MIN_PASSWORD: 10,
 };

@@ -1,10 +1,9 @@
 // Pantalla pública: inicio de sesión, registro, recuperación y restablecimiento de contraseña.
-import { sb, CONFIG, $, $$, getAccess, login, withBusy } from "./core.js";
-import { loadStudentOptions, studentFields, bindStudentFields } from "./student-options.js";
+import { sb, CONFIG, $, $$, getAccess, login, withBusy } from "./core.js?v=20261020c";
+import { loadStudentOptions, studentFields, bindStudentFields } from "./student-options.js?v=20261020c";
 
 const VIEWS = ["login", "register", "forgot", "reset"];
 const MSG = {
-  idle: ["Tu sesión se cerró por inactividad.", "warn"],
   disabled: ["Tu cuenta no tiene acceso activo.", "err"],
   changed: ["Contraseña actualizada. Inicia sesión con la nueva."],
 };
@@ -98,8 +97,12 @@ $("#f-register").addEventListener("submit", async (e) => {
     if (error) note("No pudimos completar el registro. Revisa los datos o consulta con el administrador.", "err");
     else if (data.session) {
       sessionStorage.removeItem("cs_access");
-      if (await getAccess(true)) location.replace("index.html");
-      else note("La cuenta se creó, pero no se pudo abrir el inicio. Intenta iniciar sesión.", "warn");
+      try {
+        if (await getAccess(true)) location.replace("index.html");
+        else note("La cuenta se creó, pero no tiene acceso activo. Consulta con el administrador.", "warn");
+      } catch {
+        note("Tu cuenta se creó y la sesión sigue guardada. Revisa tu conexión y vuelve a abrir Inicio.", "warn");
+      }
     } else note("No se pudo iniciar la sesión automáticamente. Intenta iniciar sesión o consulta con el administrador.", "warn");
   });
 });
