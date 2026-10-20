@@ -1,6 +1,6 @@
 // Portada pública: se ve sin iniciar sesión. Todo lo que lee lo permite RLS para el rol anónimo.
 import { sb, $, esc, mediaUrl, showError } from "./core.js";
-import { loadSite, applyTheme, chrome, videoHtml, socialHtml } from "./site.js";
+import { loadSite, applyTheme, chrome, videoHtml, socialHtml } from "./site.js?v=20261020b";
 
 const [site, s, r, m, { data: { session } }] = await Promise.all([loadSite(),
   sb.from("slates").select("*").order("position").order("created_at"),

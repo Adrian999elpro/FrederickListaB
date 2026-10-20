@@ -1,6 +1,6 @@
 // Página pública del calendario (sin iniciar sesión).
 import { sb, $, showError } from "./core.js";
-import { loadSite, applyTheme, chrome } from "./site.js";
+import { loadSite, applyTheme, chrome } from "./site.js?v=20261020b";
 import { mountCalendar } from "./calendar.js";
 const [site, ev, sl, { data: { session } }] = await Promise.all([loadSite(),
   sb.from("events").select("id,title,event_date,details").order("event_date"),
