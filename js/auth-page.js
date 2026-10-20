@@ -53,7 +53,7 @@ if (MSG[params.get("msg")]) note(...MSG[params.get("msg")]);
 if (!recovering) {
   try {
     const { data } = await sb.auth.getSession();
-    if (data?.session && await getAccess(true)) location.replace("app.html");
+    if (data?.session && await getAccess(true)) location.replace("index.html");
   } catch (err) {
     console.warn("No active session:", err);
   }
@@ -75,7 +75,7 @@ const same = (f) => f.password.value === f.again.value;
 $("#f-login").addEventListener("submit", async (e) => {
   e.preventDefault(); const f = e.currentTarget;
   await withBusy(f.querySelector("[type=submit]"), async () => {
-    try { await login(f.email.value.trim(), f.password.value); location.replace("app.html"); }
+    try { await login(f.email.value.trim(), f.password.value); location.replace("index.html"); }
     catch (err) { note(err.message, "err"); f.password.value = ""; }
   });
 });
@@ -98,7 +98,7 @@ $("#f-register").addEventListener("submit", async (e) => {
     if (error) note("No pudimos completar el registro. Revisa los datos o consulta con el administrador.", "err");
     else if (data.session) {
       sessionStorage.removeItem("cs_access");
-      if (await getAccess(true)) location.replace("app.html");
+      if (await getAccess(true)) location.replace("index.html");
       else note("La cuenta se creó, pero no se pudo abrir el inicio. Intenta iniciar sesión.", "warn");
     } else note("No se pudo iniciar la sesión automáticamente. Intenta iniciar sesión o consulta con el administrador.", "warn");
   });

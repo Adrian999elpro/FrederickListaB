@@ -4,9 +4,8 @@ export async function render(root, access) {
   const [catalog, result] = await Promise.all([loadStudentOptions(), sb.from("profiles").select("full_name,course,course_id,parallel,specialty_id,role_id").eq("id", access.id).single()]);
   if (result.error) throw result.error;
   const p = result.data;
-  root.innerHTML = `<section class="card"><h2>Hola, ${esc(p.full_name || "estudiante")}</h2><p class="muted">Este es tu espacio con el Consejo Estudiantil.</p>
-    <div class="home-links"><a class="btn ghost" href="#suggestions">💡 Enviar una sugerencia</a><a class="btn ghost" href="#chat">💬 Chat global</a><a class="btn ghost" href="#calendar">📅 Ver eventos</a></div></section>
-    <section class="card" style="margin-top:1rem"><h3>Mi curso y especialidad</h3><p class="muted">Mantén estos datos al día para que el consejo pueda organizar tus solicitudes.</p>
+  root.innerHTML = `<section class="card"><h2>👤 Mi perfil</h2><p>${esc(p.full_name || "Estudiante")}</p>
+    <h3>Mi curso y especialidad</h3><p class="muted">Mantén estos datos al día para que el consejo pueda organizar tus solicitudes.</p>
       ${!p.course_id && p.course ? `<p class="hint">Curso anterior: ${esc(p.course)}</p>` : ""}
       <form class="form">${studentFields(catalog,p)}<div class="row end"><button class="btn primary">Guardar mis datos</button></div></form></section>`;
   const form = root.querySelector("form"); bindStudentFields(form,catalog);

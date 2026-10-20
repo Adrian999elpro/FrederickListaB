@@ -35,10 +35,14 @@ function show() {
   const groups = ranks.map((rk) => ({ title: rk.name, list: people.filter((p) => p.rank_id === rk.id) }));
   const loose = people.filter((p) => !ranks.some((rk) => rk.id === p.rank_id)); if (loose.length) groups.push({ title: "Integrantes", list: loose });
   let i = 0;
-  const team = $("#team"); if (team) team.innerHTML = groups.filter((g) => g.list.length).map((g) => `<h3 class="rank-title reveal">${esc(g.title)}</h3>
-    <div class="team-grid">${g.list.map((p) => `<article class="card member reveal" style="--i:${i++ % 8}">
+  const team = $("#team"); if (team) {
+    const cards = groups.flatMap((g) => g.list.map((p) => `<article class="card member reveal" style="--i:${i++ % 8}">
+      <h3 class="member-rank">${esc(g.title)}</h3><div class="member-main">
       ${p.photo_path ? `<img class="avatar" src="${esc(mediaUrl(p.photo_path))}" alt="Foto de ${esc(p.full_name)}" loading="lazy">` : `<div class="avatar" aria-hidden="true">${esc(p.full_name.trim()[0]?.toUpperCase() ?? "?")}</div>`}
-      <h3>${esc(p.full_name)}</h3><p class="course">${esc(p.course)}</p>${p.motto ? `<q>${esc(p.motto)}</q>` : ""}</article>`).join("")}</div>`).join("") || `<p class="muted">Los integrantes se publicarán pronto.</p>`;
+      <div class="member-info"><h4>${esc(p.full_name)}</h4><p class="course">${esc(p.course)}</p>${p.motto ? `<q>${esc(p.motto)}</q>` : ""}</div>
+      </div></article>`)).join("");
+    team.innerHTML = cards ? `<div class="team-grid">${cards}</div>` : `<p class="muted">Los integrantes se publicarán pronto.</p>`;
+  }
   observe();
 }
 $("#tabs").addEventListener("click", (e) => { const b = e.target.closest("[data-i]"); if (b) { cur = +b.dataset.i; show(); } });

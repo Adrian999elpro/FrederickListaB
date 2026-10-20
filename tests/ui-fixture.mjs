@@ -1,7 +1,7 @@
 import { cpSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 mkdirSync('.preview',{recursive:true});
 for(const name of ['js','css','img']) cpSync(name,`.preview/${name}`,{recursive:true});
-for(const name of ['app.html','login.html']) cpSync(name,`.preview/${name}`);
+for(const name of ['app.html','login.html','index.html','calendario.html']) cpSync(name,`.preview/${name}`);
 writeFileSync('.preview/js/core.js',`
 export const CONFIG={APP_NAME:'Consejo Estudiantil',APP_SHORT:'CONSEJO',LOGO_URL:'img/sello.png',TAGLINE:'Tu voz cuenta'};
 export const $=(s,r=document)=>r.querySelector(s);

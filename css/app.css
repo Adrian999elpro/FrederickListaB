@@ -700,7 +700,6 @@ button, .btn { white-space: normal; overflow-wrap: anywhere; }
 .catalog-manager summary { cursor: pointer; font-size: 1.1rem; font-weight: 750; padding: .3rem 0; }
 .catalog-manager[open] summary { margin-bottom: 1rem; }
 .catalog-grid > form { padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); align-content: start; }
-.home-links { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,200px),1fr)); gap: 1rem; margin: 1rem 0; }
 @media (max-width: 860px) {
   .auth-layout { grid-template-columns: minmax(0,1fr); }
   .auth-hero { padding: 2rem 1.25rem; }

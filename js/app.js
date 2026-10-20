@@ -2,10 +2,10 @@
 import { CONFIG, requireAccess, can, logout, $, esc, showError } from "./core.js";
 
 const VIEWS = [
-  { id: "home",        title: "🏠 Inicio",                 load: () => import("./views/home.js") },
   { id: "calendar",    title: "📅 Calendario",             load: () => import("./views/calendar.js") },
   { id: "suggestions", title: "💡 Sugerencias",            load: () => import("./views/suggestions.js") },
   { id: "chat",        title: "💬 Chat global",            load: () => import("./views/chat.js") },
+  { id: "profile",     title: "👤 Mi perfil",              load: () => import("./views/profile.js") },
   { id: "site",       title: "🎨 Diseño y contenido",    permission: "site.manage",      load: () => import("./views/site.js") },
   { id: "slate",       title: "🗳️ Lista e integrantes",   permission: "list.manage",     load: () => import("./views/slate.js") },
   { id: "events",      title: "🗓️ Gestionar eventos",     permission: "events.manage",   load: () => import("./views/events.js") },
@@ -42,6 +42,7 @@ function boot(access) {
 
   let token = 0;
   async function route() {
+    if (location.hash === "#home") { location.replace("index.html"); return; }
     const mine = ++token;
     const view = allowed.find((v) => v.id === location.hash.slice(1)) ?? allowed[0];
     $("#nav").querySelectorAll("a").forEach((a) => a.toggleAttribute("aria-current", a.dataset.id === view.id));

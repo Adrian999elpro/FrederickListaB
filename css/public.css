@@ -35,6 +35,16 @@ html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 .member:hover .avatar { transform: scale(1.08); }
 .member h3 { margin: 0 0 .2rem; font-size: 1.05rem; } .member .course { margin: 0; color: var(--muted); font-size: .88rem; }
 .member q { display: block; margin-top: .6rem; font-style: italic; font-size: .92rem; color: var(--text); quotes: "“" "”"; }
+.member .member-rank { margin: 0 0 1rem; padding-bottom: .6rem; border-bottom: 2px solid var(--brand); font-size: .95rem; color: var(--brand-text); }
+.member-main { display: flex; flex-direction: column; align-items: center; }
+.member-info { min-width: 0; width: 100%; overflow-wrap: anywhere; }
+.member-info h4 { margin: 0 0 .2rem; font-size: 1.05rem; }
+@media (max-width: 480px) {
+  .member { padding: 1rem; }
+  .member-main { flex-direction: row; align-items: flex-start; gap: .9rem; }
+  .member-main .avatar { width: 64px; height: 64px; margin: 0; flex: 0 0 64px; font-size: 1.6rem; }
+  .member-info { text-align: left; }
+}
 
 /* Animación al aparecer */
 .reveal { opacity: 0; transform: translateY(26px); }

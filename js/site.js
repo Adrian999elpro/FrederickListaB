@@ -60,7 +60,6 @@ export function chrome(site, { brand, session, active }) {
   const seal = site.show_seal ? `<img class="seal" src="${esc(sealSrc(site))}" alt="Sello del colegio" width="40" height="40">` : "";
   document.getElementById("hdr").innerHTML = `<a class="pub-brand" href="index.html">${seal}<span class="brand-text"><strong>${esc(brand)}</strong>${site.school ? `<small>${esc(site.school)}</small>` : ""}</span></a>
     <nav class="pub-nav"><a href="index.html#equipo"${active === "home" ? "" : ""}>Equipo</a><a href="calendario.html"${active === "cal" ? ' aria-current="page"' : ""}>Calendario</a></nav>
-    <div class="pub-social">${socialHtml(site.socials, true)}</div>
     <div class="row">${session ? `<a class="btn primary sm" href="app.html">Ir al panel</a>` : `<a class="btn ghost sm" href="login.html">Ingresar</a><a class="btn primary sm" href="login.html#register">Registrarme</a>`}</div>`;
   document.getElementById("ftr").innerHTML = `${site.show_seal ? `<img class="foot-seal" src="${esc(sealSrc(site))}" alt="Sello del colegio" width="110" height="110">` : ""}
     ${site.school ? `<strong>${esc(site.school)}</strong>` : ""}<div class="soc-row">${socialHtml(site.socials, false)}</div><small class="muted">Hecho por y para los estudiantes · ${new Date().getFullYear()}</small>`;

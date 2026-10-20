@@ -2,19 +2,21 @@
 
 Portal del Consejo Estudiantil: página pública, registro, chat, calendario y sugerencias.
 
+La portada muestra al equipo en tarjetas contiguas, siguiendo el orden de cargos y miembros de **Lista e integrantes**. En teléfonos, las tarjetas usan una disposición compacta.
+
 ## Organización de estudiantes
 
 - Cursos iniciales: 8vo, 9no y 10mo de básica; 1ro, 2do y 3ro de bachillerato.
 - Paralelos iniciales: A y B.
 - En **Usuarios → Cursos, paralelos y especialidades**, una persona con permiso `users.manage` puede agregar opciones.
 - Las especialidades las crea el consejo. Solo se muestran al seleccionar bachillerato. No se inventaron especialidades ni se asignaron automáticamente a estudiantes.
-- **Inicio** permite al estudiante actualizar su curso, paralelo y especialidad.
+- **Mi perfil**, dentro del panel, permite al estudiante actualizar su curso, paralelo y especialidad.
 - **Usuarios** y **Sugerencias** incluyen filtros combinables. Los mensajes conservan el curso del estudiante en el momento del envío.
 - Los cursos antiguos sin equivalencia inequívoca se conservan y aparecen como “Curso anterior” hasta que el estudiante o administrador los clasifique.
 
 ## Registro
 
-El proyecto Supabase `Frederickconsejo` usa correo y contraseña, con **Authentication → Sign In / Providers → Confirm email** desactivado. El registro devuelve una sesión e ingresa al inicio. Esta configuración pertenece al proyecto alojado; no se cambia solamente editando el frontend.
+El proyecto Supabase `Frederickconsejo` usa correo y contraseña, con **Authentication → Sign In / Providers → Confirm email** desactivado. El registro y el inicio de sesión llevan a la portada pública de Revolución Estudiantil (`index.html`), conservando la sesión y el botón **Ir al panel**. Esta configuración pertenece al proyecto alojado; no se cambia solamente editando el frontend.
 
 El enlace de recuperación debe permitir `login.html?view=reset` dentro de las URL de redirección de Supabase.
 
