@@ -1,6 +1,7 @@
 // Portada pública: se ve sin iniciar sesión. Todo lo que lee lo permite RLS para el rol anónimo.
 import { sb, $, esc, mediaUrl, showError } from "./core.js?v=20261020c";
 import { loadSite, applyTheme, chrome, videoHtml, socialHtml } from "./site.js?v=20261020c";
+import { mountPlanPager } from "./plan-pager.js?v=20261020d";
 
 const [site, s, r, m, { data: { session } }] = await Promise.all([loadSite(),
   sb.from("slates").select("*").order("position").order("created_at"),
@@ -9,6 +10,7 @@ const err = s.error || r.error || m.error; if (err) showError(err);
 applyTheme(site);
 const slates = s.data ?? []; let cur = 0;
 const brand = () => slates[cur]?.name ?? "Consejo Estudiantil";
+const planPager = mountPlanPager($("#plan-frame"), $("#plan"), $("#plan-controls"));
 
 // Secciones bajo la portada, en el orden y con los títulos que eligió el administrador.
 const video = videoHtml(site.video), socials = socialHtml(site.socials, false);
@@ -26,7 +28,7 @@ function show() {
   if (!sl) { $("#hero-name").textContent = "Aún no hay lista publicada"; return; }
   document.title = `${sl.name} · Consejo Estudiantil`;
   $("#hero-name").textContent = sl.name; $("#hero-motto").textContent = sl.motto ? `“${sl.motto}”` : "";
-  $("#plan").textContent = sl.plan || "El plan de trabajo se publicará pronto.";
+  planPager.setText(sl.plan);
   const logo = $("#hero-logo"); logo.hidden = !sl.logo_path; if (sl.logo_path) logo.src = mediaUrl(sl.logo_path);
   $("#tabs").hidden = slates.length < 2;
   $("#tabs").innerHTML = slates.map((x, i) => `<button class="btn ghost sm${i === cur ? " active" : ""}" data-i="${i}">${esc(x.name)}</button>`).join("");

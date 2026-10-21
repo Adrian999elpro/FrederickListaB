@@ -20,7 +20,25 @@ html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 .hero-name { margin: 0; font-size: clamp(2.2rem, 7vw, 4.2rem); line-height: 1.05; background: linear-gradient(90deg, var(--brand-text), var(--accent-gold), var(--brand-text)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: rise .8s var(--ease) both, shine 6s linear infinite; }
 .hero-motto { font-size: clamp(1.05rem, 2.4vw, 1.4rem); font-style: italic; color: var(--muted); margin: .8rem 0 2rem; animation: rise .8s var(--ease) .15s both; }
 .plan { max-width: 780px; margin: 0 auto; text-align: left; animation: rise .8s var(--ease) .3s both; }
-.plan h2 { margin-top: 0; } .plan-text { white-space: pre-line; line-height: 1.7; }
+.plan h2 { margin-top: 0; }
+.plan-frame { position: relative; height: clamp(17rem, 44svh, 25rem); overflow: hidden; }
+.plan-frame.plan-single { height: auto; }
+.plan-frame:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; border-radius: 4px; }
+.plan-content { display: flow-root; white-space: pre-line; line-height: 1.65; overflow-wrap: anywhere; }
+.plan-content > p { margin: 0 0 .8rem; }
+.plan-content > h3 { margin: 1rem 0 .65rem; font-size: 1rem; color: var(--brand-text); }
+.plan-content > h4 { margin: .8rem 0 .55rem; font-size: .95rem; }
+.plan-content > :first-child { margin-top: 0; }
+.plan-content > :last-child { margin-bottom: 0; }
+.plan-measure { position: absolute; top: 0; left: 0; right: 0; visibility: hidden; pointer-events: none; }
+.plan-controls { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.plan-controls[hidden] { display: none; }
+.plan-controls .btn { min-height: 44px; }
+.plan-controls [role=status] { color: var(--muted); font-size: .82rem; text-align: center; }
+@media (max-width: 380px) {
+  .plan-controls { flex-wrap: wrap; }
+  .plan-controls [role=status] { order: -1; flex-basis: 100%; }
+}
 .slate-tabs { display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
 .slate-tabs .btn.active { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
 

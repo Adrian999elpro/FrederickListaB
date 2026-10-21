@@ -29,6 +29,8 @@ El sitio es estático. Servir la carpeta con cualquier servidor HTTP local (por 
 - `tests/courses.integration.sql`: verifica catálogos, metadatos de registro, permisos, edición, especialidades solo en bachillerato y privacidad de sugerencias. Usa una transacción y revierte los datos de prueba.
 - `node tests/ui-fixture.mjs`: genera `.preview/` con datos ficticios y sin escrituras a Supabase. Abrir `/.preview/app.html#users` para comprobar edición, filtros, catálogos y diseño móvil.
 - `node tests/session.test.mjs`: verifica conservación y migración de sesión, renovación habilitada, errores temporales, cuentas desactivadas y salida voluntaria, sin credenciales reales.
+- El plan de trabajo público se divide automáticamente según el espacio de pantalla. Los títulos acompañan a sus propuestas; solo los párrafos demasiado largos se separan por oraciones o palabras. Al cambiar el tamaño de pantalla se conserva la posición de lectura.
+- `node tests/plan-pager.test.mjs`: comprueba que la paginación conserve todo el contenido en orden, no deje títulos huérfanos y divida correctamente las propuestas extensas.
 - Las migraciones de `supabase/migrations` corresponden a la actualización del proyecto existente; no son un instalador del esquema original.
 
 Validado el 20 de octubre de 2026: registro real con sesión inmediata (cuenta temporal eliminada), pruebas de permisos y campos, filtros de interfaz, logo, recuperación y pantallas de 320 y 360 píxeles.

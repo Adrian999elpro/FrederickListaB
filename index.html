@@ -8,7 +8,7 @@
   <title>Consejo Estudiantil</title>
   <link rel="stylesheet" href="css/theme.css?v=20261020c">
   <link rel="stylesheet" href="css/app.css?v=20261020c">
-  <link rel="stylesheet" href="css/public.css?v=20261020c">
+  <link rel="stylesheet" href="css/public.css?v=20261020d">
 </head>
 <body class="pub">
 <header id="hdr" class="pub-header"></header>
@@ -18,12 +18,19 @@
     <div id="tabs" class="slate-tabs" hidden></div>
     <div class="hero-id"><img id="hero-logo" class="hero-logo" alt="Logo de la lista" hidden><h1 id="hero-name" class="hero-name">…</h1></div>
     <p id="hero-motto" class="hero-motto"></p>
-    <div class="plan card"><h2>Plan de trabajo</h2><div id="plan" class="plan-text"></div></div>
+    <div class="plan card"><h2 id="plan-title">Plan de trabajo</h2>
+      <div id="plan-frame" class="plan-frame" role="region" aria-labelledby="plan-title" aria-describedby="plan-status" tabindex="0"><div id="plan" class="plan-content"></div></div>
+      <nav id="plan-controls" class="plan-controls" aria-label="Páginas del plan de trabajo" hidden>
+        <button class="btn ghost sm" type="button" data-plan-previous aria-controls="plan">← Anterior</button>
+        <span id="plan-status" data-plan-status role="status" aria-live="polite" aria-atomic="true"></span>
+        <button class="btn primary sm" type="button" data-plan-next aria-controls="plan">Siguiente →</button>
+      </nav>
+    </div>
   </section>
   <div id="sections"></div>
   <section class="wrap center" id="join"></section>
 </main>
 <footer id="ftr" class="pub-footer"></footer>
-<script type="module" src="js/public.js?v=20261020c"></script>
+<script type="module" src="js/public.js?v=20261020d"></script>
 </body>
 </html>
