@@ -1,5 +1,5 @@
 // Calendario mensual compartido (página pública, panel y gestión). Los eventos se leen con RLS: son públicos.
-import { esc } from "./core.js?v=20261020c";
+import { esc } from "./core.js?v=20261020e";
 const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 const iso = (y, m, d) => `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 

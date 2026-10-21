@@ -1,4 +1,4 @@
-import { sb, esc, toast, showError, withBusy, $ } from "../core.js?v=20261020c";
+import { sb, esc, toast, showError, withBusy, $ } from "../core.js?v=20261020e";
 
 const DOMAIN_RE = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/;
 

@@ -1,4 +1,4 @@
-import { sb, esc, fmtDate, showError, $ } from "../core.js?v=20261020c";
+import { sb, esc, fmtDate, showError, $ } from "../core.js?v=20261020e";
 
 const PAGE = 50;
 

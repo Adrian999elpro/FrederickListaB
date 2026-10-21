@@ -1,4 +1,4 @@
-import { sb, can, esc, fmtDate, showError, $ } from "../core.js?v=20261020c";
+import { sb, can, esc, fmtDate, showError, $ } from "../core.js?v=20261020e";
 let channel;
 export async function render(root, access) {
   root.innerHTML = `<div class="card"><h2>💬 Chat global</h2><div id="log" class="chat-log" aria-live="polite"></div>

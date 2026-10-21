@@ -1,6 +1,6 @@
 // Editor de diseño y contenido de la página pública: sello, colores, estilo, secciones, video y redes.
-import { sb, esc, toast, showError, withBusy, mediaUrl, uploadMedia, $ } from "../core.js?v=20261020c";
-import { loadSite, applyTheme, NETS, PRESETS, sealSrc } from "../site.js?v=20261020c";
+import { sb, esc, toast, showError, withBusy, mediaUrl, uploadMedia, $ } from "../core.js?v=20261020e";
+import { loadSite, applyTheme, NETS, PRESETS, sealSrc } from "../site.js?v=20261020e";
 
 export async function render(root) {
   const W = await loadSite(), O = structuredClone(W), files = {}, T = W.theme;

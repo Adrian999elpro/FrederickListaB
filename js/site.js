@@ -1,5 +1,5 @@
 // Ajustes personalizables del sitio: se guardan en site_settings ('site') y se aplican en la página pública y en el panel.
-import { sb, esc, mediaUrl } from "./core.js?v=20261020c";
+import { sb, esc, mediaUrl } from "./core.js?v=20261020e";
 
 export const DEFAULTS = {
   school: "Unidad Educativa Técnica Particular Frederick Winslow Taylor", seal: null, show_seal: true,

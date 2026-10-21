@@ -1,18 +1,18 @@
 // Shell del panel del consejo: Navegación por permisos y carga diferida de cada sección.
-import { CONFIG, requireAccess, can, logout, $, esc, showError } from "./core.js?v=20261020c";
+import { CONFIG, requireAccess, can, logout, $, esc, showError } from "./core.js?v=20261020e";
 
 const VIEWS = [
-  { id: "calendar",    title: "📅 Calendario",             load: () => import("./views/calendar.js?v=20261020c") },
-  { id: "suggestions", title: "💡 Sugerencias",            load: () => import("./views/suggestions.js?v=20261020c") },
-  { id: "chat",        title: "💬 Chat global",            load: () => import("./views/chat.js?v=20261020c") },
-  { id: "profile",     title: "👤 Mi perfil",              load: () => import("./views/profile.js?v=20261020c") },
-  { id: "site",       title: "🎨 Diseño y contenido",    permission: "site.manage",      load: () => import("./views/site.js?v=20261020c") },
-  { id: "slate",       title: "🗳️ Lista e integrantes",   permission: "list.manage",     load: () => import("./views/slate.js?v=20261020c") },
-  { id: "events",      title: "🗓️ Gestionar eventos",     permission: "events.manage",   load: () => import("./views/events.js?v=20261020c") },
-  { id: "users",       title: "👥 Usuarios",               permission: "users.read",      load: () => import("./views/users.js?v=20261020c") },
-  { id: "roles",       title: "🛡️ Roles y permisos",      permission: "roles.manage",    load: () => import("./views/roles.js?v=20261020c") },
-  { id: "settings",    title: "⚙️ Registro",              permission: "settings.manage", load: () => import("./views/settings.js?v=20261020c") },
-  { id: "audit",       title: "📜 Auditoría",              permission: "audit.read",      load: () => import("./views/audit.js?v=20261020c") },
+  { id: "calendar",    title: "📅 Calendario",             load: () => import("./views/calendar.js?v=20261020e") },
+  { id: "suggestions", title: "💡 Sugerencias",            load: () => import("./views/suggestions.js?v=20261020e") },
+  { id: "chat",        title: "💬 Chat global",            load: () => import("./views/chat.js?v=20261020e") },
+  { id: "profile",     title: "👤 Mi perfil",              load: () => import("./views/profile.js?v=20261020e") },
+  { id: "site",       title: "🎨 Diseño y contenido",    permission: "site.manage",      load: () => import("./views/site.js?v=20261020e") },
+  { id: "slate",       title: "🗳️ Lista e integrantes",   permission: "list.manage",     load: () => import("./views/slate.js?v=20261020e") },
+  { id: "events",      title: "🗓️ Gestionar eventos",     permission: "events.manage",   load: () => import("./views/events.js?v=20261020e") },
+  { id: "users",       title: "👥 Usuarios",               permission: "users.read",      load: () => import("./views/users.js?v=20261020e") },
+  { id: "roles",       title: "🛡️ Roles y permisos",      permission: "roles.manage",    load: () => import("./views/roles.js?v=20261020e") },
+  { id: "settings",    title: "⚙️ Registro",              permission: "settings.manage", load: () => import("./views/settings.js?v=20261020e") },
+  { id: "audit",       title: "📜 Auditoría",              permission: "audit.read",      load: () => import("./views/audit.js?v=20261020e") },
 ];
 
 try {
@@ -45,7 +45,7 @@ function boot(access) {
   menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
   document.addEventListener("click", (e) => { if (!e.target.closest(".menu")) setMenu(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) { setMenu(false); mbtn.focus(); } });
-  import("./site.js?v=20261020c").then((m) => m.loadSite().then(m.applyTheme)).catch(() => {});   // colores y estilo personalizados
+  import("./site.js?v=20261020e").then((m) => m.loadSite().then(m.applyTheme)).catch(() => {});   // colores y estilo personalizados
 
   let token = 0;
   async function route() {

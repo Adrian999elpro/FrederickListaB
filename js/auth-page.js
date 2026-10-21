@@ -1,6 +1,6 @@
 // Pantalla pública: inicio de sesión, registro, recuperación y restablecimiento de contraseña.
-import { sb, CONFIG, $, $$, getAccess, login, withBusy } from "./core.js?v=20261020c";
-import { loadStudentOptions, studentFields, bindStudentFields } from "./student-options.js?v=20261020c";
+import { sb, CONFIG, $, $$, getAccess, login, withBusy } from "./core.js?v=20261020e";
+import { loadStudentOptions, studentFields, bindStudentFields } from "./student-options.js?v=20261020e";
 
 const VIEWS = ["login", "register", "forgot", "reset"];
 const MSG = {

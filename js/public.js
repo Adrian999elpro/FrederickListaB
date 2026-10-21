@@ -1,7 +1,7 @@
 // Portada pública: se ve sin iniciar sesión. Todo lo que lee lo permite RLS para el rol anónimo.
-import { sb, $, esc, mediaUrl, showError } from "./core.js?v=20261020c";
-import { loadSite, applyTheme, chrome, videoHtml, socialHtml } from "./site.js?v=20261020c";
-import { mountPlanPager } from "./plan-pager.js?v=20261020d";
+import { sb, $, esc, mediaUrl, showError } from "./core.js?v=20261020e";
+import { loadSite, applyTheme, chrome, videoHtml, socialHtml } from "./site.js?v=20261020e";
+import { mountPlanPager } from "./plan-pager.js?v=20261020e";
 
 const [site, s, r, m, { data: { session } }] = await Promise.all([loadSite(),
   sb.from("slates").select("*").order("position").order("created_at"),

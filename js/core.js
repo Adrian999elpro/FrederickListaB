@@ -1,8 +1,8 @@
 // Núcleo del frontend: cliente Supabase, sesión, acceso, caché y utilidades de interfaz.
 // Aquí NO se decide ninguna autorización: lo que se oculta en pantalla lo vuelve a exigir el servidor (RLS/RPC).
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm";
-import { CONFIG } from "./config.js?v=20261020c";
-import { persistentSessionStorage } from "./session-storage.js?v=20261020c";
+import { CONFIG } from "./config.js?v=20261020e";
+import { persistentSessionStorage } from "./session-storage.js?v=20261020e";
 
 export { CONFIG };
 export const sb = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, {
